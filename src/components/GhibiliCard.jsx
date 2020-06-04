@@ -1,7 +1,7 @@
 import React from 'react';
 
 class GhibliCard extends React.Component {
-    
+
 
     render() {
         return (
@@ -12,7 +12,7 @@ class GhibliCard extends React.Component {
                             <p className="header-text">{this.props.movie.title}</p>
                         </div>
                         <div className="card-body">
-                            <p className="card-text">{this.props.movie}</p>
+                            <p className="card-text">{this.props.movie.description}</p>
                         </div>
                     </div>
                 </div>

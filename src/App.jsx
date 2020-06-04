@@ -1,39 +1,55 @@
 import React from 'react';
-import GhibliCard from './components/GhibliCard'
+import GhibliCard from './components/GhibiliCard'
 
 class App extends React.Component {
-    state = {
-        movies: [],
-        id: '',
-        title: '',
-        description: '',
-        director: '',
-        producer: '',
-        release_date: '',
-        rt_scote: '',
-    }
+        state = {
+            movies: [],
+            id: '',
+            title: '',
+            description: '',
+            director: '',
+            producer: '',
+            release_date: '',
+            rt_scote: '',
+            isLoaded: false,
+        }
+    
     componentDidMount() {
         console.log('hello')
         fetch("https://ghibliapi.herokuapp.com/films")
-        .then(res => res.json())
-        .then(obj => console.log(obj));
-       
+            .then(res => res.json())
+            .then(json => {
+                this.setState({
+                    isLoaded: true,
+                    movies: json,
+                })
+            })
+
     }
     render() {
-       
+        if (this.state.isLoaded) {
             return (
                 <div>
                     <main className="container">
                         <section className="row justify-content-center">
-                            <p>This is where the cards will go</p>
-                            {this.state.movies.map((movie) => (
-                                <GhibiliCard movie={movie} key={`movie-${movie.id}`} />
-                            ))}
+                            <div>
+                                {this.state.movies.map((movie) => (
+                                    <GhibliCard movie={movie} key={`movie-${movie.id}`} />
+                                ))}
+                            </div>
+
                         </section>
                     </main>
                 </div>
             );
-       
+        } else {
+            return (
+                <h1>Please wait while page loads...</h1>
+            )
+
+        }
+
+
     }
 }
 
