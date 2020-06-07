@@ -8,29 +8,15 @@ class App extends React.Component {
         id: '',
         title: '',
         description: '',
-        director: '',
-        producer: '',
-        release_date: '',
-        rt_scote: '',
-        characters: [],
         name: '',
-        age:'',
-        gender:'',
-        eye_color:'',
-        hair_color:'',
-        films: [],
-        speices: '',
-        url: '',
+        age: '',
+        gender: '',
+        eye_color: '',
+        hair_color: '',
         isFilmsLoaded: false,
         isCharactersLoaded: false,
     }
 
-    componentDidMount() {
-        console.log('hello')
-        
-        
-
-    }
     render() {
         if (this.state.isFilmsLoaded && !this.state.isCharactersLoaded) {
             return (
@@ -42,6 +28,12 @@ class App extends React.Component {
                                     <GhibliCard movie={movie} key={`movie-${movie.id}`} />
                                 ))}
                             </div>
+                            <button onClick={() =>
+                                this.setState({
+                                    isFilmsLoaded: false,
+                                    isCharactersLoaded: false,
+                                })}
+                                className="btn m-2 btn-dark">Return to Home</button>
                         </section>
                     </main>
                 </div>
@@ -56,11 +48,17 @@ class App extends React.Component {
                                     <CharacterCard character={character} key={`character-${character.id}`} />
                                 ))}
                             </div>
+                            <button onClick={() =>
+                                this.setState({
+                                    isFilmsLoaded: false,
+                                    isCharactersLoaded: false,
+                                })}
+                                className="btn m-2 btn-dark">Return to Home</button>
                         </section>
                     </main>
                 </div>
             )
-        } 
+        }
         else {
             return (
                 <div className="col-md-8">
@@ -68,22 +66,26 @@ class App extends React.Component {
                         <img className="card-img-top" src="https://upload.wikimedia.org/wikipedia/en/thumb/c/ca/Studio_Ghibli_logo.svg/1200px-Studio_Ghibli_logo.svg.png" alt="https://ghibliapi.herokuapp.com/images/logo.svg"></img>
                         <div className="card-body">
                             <p className="card-text">A simple website to display information about the Studio Ghibli Films.</p>
-                            <button onClick={() => 
+                            <button onClick={() =>
                                 fetch("http://ghibliapi.herokuapp.com/films")
-                                .then(res => res.json())
-                                .then(json => {
-                                    this.setState({ 
-                                        movies: json,
-                                        isFilmsLoaded: true })})} 
-                                        className="btn m-2 btn-dark">Load Films</button>
-                            <button onClick={() => 
+                                    .then(res => res.json())
+                                    .then(json => {
+                                        this.setState({
+                                            movies: json,
+                                            isFilmsLoaded: true
+                                        })
+                                    })}
+                                className="btn m-2 btn-dark">Load Films</button>
+                            <button onClick={() =>
                                 fetch("https://ghibliapi.herokuapp.com/people")
-                                .then(res => res.json())
-                                .then(json => {
-                                    this.setState({
-                                        characters: json,
-                                        isCharactersLoaded: true})})}
-                                 className="btn m-2 btn-dark">Load Characters</button>
+                                    .then(res => res.json())
+                                    .then(json => {
+                                        this.setState({
+                                            characters: json,
+                                            isCharactersLoaded: true
+                                        })
+                                    })}
+                                className="btn m-2 btn-dark">Load Characters</button>
                         </div>
                     </div>
                 </div>

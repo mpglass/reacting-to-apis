@@ -2,9 +2,9 @@ import React from 'react';
 
 class GhibliCard extends React.Component {
 
-
     render() {
         return (
+            
             <section>
                 <div className="col-md-8">
                     <div className="card my-2 shadow">
@@ -20,5 +20,6 @@ class GhibliCard extends React.Component {
         )
     }
 }
+
 
 export default GhibliCard;
